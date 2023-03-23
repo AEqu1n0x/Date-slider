@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Стажировка</title>
-    <link rel="stylesheet" href="index.css" type="text/css"/>
-    <link rel="stylesheet" href="node_modules/ion-rangeslider/css/ion.rangeSlider.css" type="text/css"/>
-</head>
+    <link rel="stylesheet" href="css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="node_modules/ion-rangeslider/css/ion.rangeSlider.css" type="text/css" />
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
+  </head>
 
-<body>
+  <body>
+    <main>
+      <article class="starting" style="font-family: Verdana, Helvetica, Arial, sans-serif">
+        <h1 style="font-size: calc(10px + 1vw); padding: 15px">Тестовое задание. Выполнил Егоров Андрей</h1>
+        <p>Введите минимальный и максимальный год (Ограничено с 2000 до 2030)</p>
+        <input type="text" class="" value="2022" id="min" />
+        <input type="text" class="" value="2026" id="max" />
+        <p>Введите начало и конец (формат - MM/YYYY):</p>
+        <input type="text" class="" value="03/2023" id="from" />
+        <input type="text" class="" value="09/2024" id="to" /> <br />
+        <br />
+        <button class="btn" type="submit" id="submit" onclick="alerted();">Выполнить построение</button>
+      </article>
 
-
-<div class="starting">   
-    <h4 class="text1">Тестовое задание. Выполнил Егоров Андрей</h4>
-    <p class="text1">Введите минимальный и максимальный год (Ограничено с 2000 до 2030)</p>
-    <input type="text" class="" value="2022" id="min"/>
-    <input type="text" class="" value="2026" id="max"/>
-    <br>
-    <p  class="text1">Введите начало и конец (формат - MM/YYYY): </p>
-    <input type="text" class="" value="03/2023" id="from" />
-    <input type="text" class="" value="09/2024" id="to"/> <br> <br>
-    <button class="btn" type="submit" id="submit" onclick="alerted();">Выполнить построение</button>
-</div>
-
-
-
-    <div class="window">  
-
-        <div class="forswitch">
-            <section class="slider-checkbox">
-                <input class="hiden" type="radio" name="r" id="allyear" />
-                <label for="allyear" id="year" class="active">Все года</label>
-              </section>
-              <section class="slider-checkbox">
-                <input class="hiden" type="radio" name="r" id="month" />
-                <label for="month" id="mesc" class="passive">Месяца</label>
-              </section>
+      <section class="window">
+        <div class="forswitch" style="font-family: Verdana, Helvetica, Arial, sans-serif">
+          <section class="slider-checkbox">
+            <input class="hiden" type="radio" name="r" id="allyear" />
+            <label for="allyear" id="year" class="active">Все года</label>
+          </section>
+          <section class="slider-checkbox">
+            <input class="hiden" type="radio" name="r" id="month" />
+            <label for="month" id="mesc" class="passive">Месяца</label>
+          </section>
         </div>
-
-        <div id="yearright" style = 'display: block;' class="dateslider"> 
-
-            <input type="text" class="js-range-slider2" name="my_range2" value=""/>
-
+        <div id="yearright" style="display: block" class="dateslider">
+          <input type="text" class="js-range-slider2" name="my_range2" value="" />
         </div>
-        <div id="monthright" style = 'display: none;' class="dateslider2"> 
-
-            <input type="text" class="js-range-slider" name="my_range" value=""/>
-
+        <div id="monthright" style="display: none" class="dateslider2">
+          <input type="text" class="js-range-slider" name="my_range" value="" />
         </div>
+      </section>
+    </main>
 
-    </div>
-
-
-
-    <!--jQuery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <script src="node_modules/ion-rangeslider/js/ion.rangeSlider.js"></script>
-    <script src="index.js"></script> 
-    <script src="script.js"></script>     
-</body>
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
