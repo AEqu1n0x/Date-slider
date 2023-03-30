@@ -12,31 +12,27 @@
 
   <body>
     <main>
-      <article>
-        <h1>Тестовое задание. Выполнил Егоров Андрей</h1>
-        <section class="starting">
-          <p>Введите минимальный и максимальный год (Ограничено с 2000 до 2030)</p>
-          <input type="text" class="input-min" value="2022" id="min" />
-          <input type="text" class="input-max" value="2026" id="max" />
-          <p>Введите начало и конец (формат - MM/YYYY):</p>
-          <input type="text" class="input-from" value="03/2023" id="from" />
-          <input type="text" class="input-to" value="10/2024" id="to" />
-        </section>
-        <section class="window">
-          <div class="forswitch">
-            <input class="hiden" type="radio" name="r" id="allyear" />
-            <label for="allyear" id="year" class="active">Все года</label>
-            <input class="hiden" type="radio" name="r" id="month" />
-            <label for="month" id="mesc" class="passive low-screen">Месяца</label>
-          </div>
-          <div id="yearright" style="display: block" class="dateslider">
-            <input type="text" class="Slider-Year" name="my_range" value="" />
-          </div>
-          <div id="monthright" style="display: none" class="dateslider2">
-            <input type="text" class="Slider-Month" name="my_range2" value="" />
-          </div>
-        </section>
-      </article>
+      <h1>Тестовое задание. Выполнил Егоров Андрей</h1>
+      <section class="slider-settings">
+        <p>Введите минимальный и максимальный год (Ограничено с 2000 до 2030)</p>
+        <input type="text" class="input-min" value="2022" id="min" />
+        <input type="text" class="input-max" value="2026" id="max" />
+        <p>Введите начало и конец (формат - MM/YYYY):</p>
+        <input type="text" class="input-from" value="03/2023" id="from" />
+        <input type="text" class="input-to" value="10/2024" id="to" />
+      </section>
+      <section class="slider">
+        <div class="forswitch">
+          <label for="allyear" id="year" class="switcher-label active">Все года</label>
+          <label for="month" id="mesc" class="low-screen switcher-label">Месяца</label>
+        </div>
+        <div id="yearright" style="display: block" class="dateslider year">
+          <input type="text" class="slider-year" name="my_range" value="" />
+        </div>
+        <div id="monthright" style="display: none" class="dateslider">
+          <input type="text" class="slider-month" name="my_range2" value="" />
+        </div>
+      </section>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
