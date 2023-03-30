@@ -1,7 +1,5 @@
-let $rangeYear = $(".Slider-Year");
-let $rangeMonth = $(".Slider-Month");
-let $inputmin = $(".input-min");
-let $inputmax = $(".input-max");
+let $rangeYear = $(".slider-year");
+let $rangeMonth = $(".slider-month");
 let $inputFrom = $(".input-from");
 let $inputTo = $(".input-to");
 
@@ -59,8 +57,8 @@ $rangeMonth.ionRangeSlider(
   (objectSlider.onFinish = updateYearSlider)
 );
 
-SliderYear = $rangeYear.data("ionRangeSlider");
-SliderMonth = $rangeMonth.data("ionRangeSlider");
+sliderYear = $rangeYear.data("ionRangeSlider");
+sliderMonth = $rangeMonth.data("ionRangeSlider");
 
 // начальная функция при запуске страницы
 function starting() {
@@ -114,22 +112,16 @@ function updateInputs(data) {
 
   // изменение input`ов у месяцев (формирование даты формата MM/YYYY)
 
-  fromYear = Math.floor(from / 12) + borderCount.getMin; // формирование значения при сдвиге ползунка для левой границы
+  // формирование значения при сдвиге ползунка для левой границы
+  fromYear = Math.floor(from / 12) + borderCount.getMin;
   fromMonth = (from % 12) + 1;
-  if (fromMonth < 10) {
-    starting = "0" + fromMonth + "/" + fromYear;
-  } else {
-    starting = fromMonth + "/" + fromYear;
-  }
+  starting = fromMonth < 10 ? "0" + fromMonth + "/" + fromYear : fromMonth + "/" + fromYear;
   $inputFrom.prop("value", starting);
 
-  toYear = Math.floor(to / 12) + borderCount.getMin; // формирование значения при сдвиге ползунка для правой границы
+  // формирование значения при сдвиге ползунка для правой границы
+  toYear = Math.floor(to / 12) + borderCount.getMin;
   toMonth = (to % 12) + 1;
-  if (toMonth < 10) {
-    ending = "0" + toMonth + "/" + toYear;
-  } else {
-    ending = toMonth + "/" + toYear;
-  }
+  ending = toMonth < 10 ? "0" + toMonth + "/" + toYear : toMonth + "/" + toYear;
   $inputTo.prop("value", ending);
 }
 
@@ -140,69 +132,51 @@ function updateData() {
   starting();
 }
 
-// обновление слайдера при вводе минимального года
-$inputmin.on("input", function () {
-  updateData();
-
-  if (borderCount.getMin > 1999 && borderCount.getMin < borderCount.getMax) {
-    SliderYear.update({
-      values: finalList,
-      from: borderCount.fromLeft,
-      to: borderCount.fromRight,
-    });
-    SliderMonth.update({
-      values: finalList,
-      from: borderCount.fromLeft,
-      to: borderCount.fromRight,
-    });
+// считываение данных из input`ов и построение нового слайдера
+document.querySelector(".slider-settings").addEventListener("input", function (evt) {
+  // считывание минимального года
+  if (evt.target.className == "input-min") {
+    updateData();
+    if (borderCount.getMin > 1999 && borderCount.getMin < borderCount.getMax) {
+      slidersUpdateFromInput();
+    }
+  }
+  // считывание максимального года
+  if (evt.target.className == "input-max") {
+    updateData();
+    if (borderCount.getMax < 2031 && borderCount.getMin < borderCount.getMax) {
+      slidersUpdateFromInput();
+    }
+  }
+  // считывание начальной даты
+  if (evt.target.className == "input-from") {
+    updateData();
+    if (checkRestrictions()) {
+      slidersUpdateFromInput();
+    }
+  }
+  // считывание конечной даты
+  if (evt.target.className == "input-to") {
+    updateData();
+    if (checkRestrictions()) {
+      slidersUpdateFromInput();
+    }
   }
 });
 
-// обновление слайдера при вводе максимального года
-$inputmax.on("input", function () {
-  updateData();
-
-  if (borderCount.getMax < 2031 && borderCount.getMin < borderCount.getMax) {
-    SliderYear.update({
-      values: finalList,
-      from: borderCount.fromLeft,
-      to: borderCount.fromRight,
-    });
-    SliderMonth.update({
-      values: finalList,
-      from: borderCount.fromLeft,
-      to: borderCount.fromRight,
-    });
-  }
-});
-
-// обновление слайдера при вводе начала
-$inputFrom.on("input", function () {
-  updateData();
-
-  if (checkRestrictions()) {
-    SliderYear.update({
-      from: borderCount.fromLeft,
-    });
-    SliderMonth.update({
-      from: borderCount.fromLeft,
-    });
-  }
-});
-
-// обновление слайдера при вводе конца
-$inputTo.on("input", function () {
-  updateData();
-
-  if (checkRestrictions()) {
-    SliderYear.update({
-      to: borderCount.fromRight,
-    });
-    SliderMonth.update({
-      to: borderCount.fromRight,
-    });
-  }
-});
+// функция для обновления слайдеров при вводе данных из input`ов
+function slidersUpdateFromInput() {
+  sliderYear.update({
+    values: finalList,
+    from: borderCount.fromLeft,
+    to: borderCount.fromRight,
+  });
+  sliderMonth.update({
+    values: finalList,
+    from: borderCount.fromLeft,
+    to: borderCount.fromRight,
+  });
+}
 
 // проверка входных значений для построения слайдера
 function checkRestrictions() {
@@ -218,11 +192,12 @@ function checkRestrictions() {
   }
 }
 
+// Прошу прощения, но не имею представления как сделать в опциях новое поле с флагом, которое будет меняться в зависимости от определенного слайдера, поэтому не могу объединить данные функции
 // функция для обновления слайдера по месяцам при изменении первого
 function updateMonthSlider(data) {
-  from = data.from;
-  to = data.to;
-  SliderMonth.update({
+  let from = data.from;
+  let to = data.to;
+  sliderMonth.update({
     from: from,
     to: to,
   });
@@ -230,9 +205,9 @@ function updateMonthSlider(data) {
 
 // функция для обновления слайдера по годам при изменении второго
 function updateYearSlider(data) {
-  from = data.from;
-  to = data.to;
-  SliderYear.update({
+  let from = data.from;
+  let to = data.to;
+  sliderYear.update({
     from: from,
     to: to,
   });
